@@ -1,12 +1,18 @@
 import React from "react";
+import { Input, Label, Control, Help } from "bloomer";
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div>
-    <label>{label}</label>
-    <div>
-      <input {...input} placeholder={label} type={type} />
-      {touched && error && <span>{error}</span>}
-    </div>
+  <div className="field">
+    <Label>{label}</Label>
+    <Control>
+      <Input
+        {...input}
+        placeholder={label}
+        type={type}
+        isColor={touched && error && "danger"}
+      />
+      {touched && error && <Help isColor="danger">{error}</Help>}
+    </Control>
   </div>
 );
 

@@ -2,55 +2,66 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import validate from "../../utils/validate";
 import renderField from "../../utils/renderField";
+import renderOptionField from "../../utils/renderOptionField";
+import renderError from "../../utils/renderError";
 
-const renderError = ({ meta: { touched, error } }) =>
-  touched && error ? <span>{error}</span> : false;
+import { Field as BField, Control, Button, Label } from "bloomer";
 
 const WizardFormSecondStep = props => {
   const { handleSubmit, previousStep } = props;
   return (
     <form onSubmit={handleSubmit}>
       <Field name="email" type="email" component={renderField} label="Email" />
-      <div>
-        <label>I identify myself as:</label>
-        <div>
-          <label>
-            <Field name="gender" component="input" type="radio" value="male" />{" "}
-            Male
-          </label>
-          <label>
-            <Field
-              name="gender"
-              component="input"
-              type="radio"
-              value="female"
-            />{" "}
-            Female
-          </label>
-          <label>
-            <Field
-              name="gender"
-              component="input"
-              type="radio"
-              value="neutral"
-            />{" "}
-            Neutral
-          </label>
-          <label>
-            <Field name="gender" component="input" type="radio" value="other" />{" "}
-            Rather not say
-          </label>
+      <BField>
+        <Label>I identify myself as:</Label>
+        <Control>
+          <Field
+            name="gender"
+            fieldName="gender"
+            component={renderOptionField}
+            type="radio"
+            label="Male"
+            value="male"
+          />
+          <Field
+            name="gender"
+            fieldName="gender"
+            component={renderOptionField}
+            type="radio"
+            label="Female"
+            value="female"
+          />
+          <Field
+            name="gender"
+            fieldName="gender"
+            component={renderOptionField}
+            type="radio"
+            label="Neutral"
+            value="neutral"
+          />
+          <Field
+            name="gender"
+            fieldName="gender"
+            component={renderOptionField}
+            type="radio"
+            label="I rather not say"
+            value="other"
+          />
           <Field name="gender" component={renderError} />
-        </div>
-      </div>
-      <div>
-        <button type="button" className="previous" onClick={previousStep}>
-          Previous
-        </button>
-        <button type="submit" className="next">
-          Next
-        </button>
-      </div>
+        </Control>
+      </BField>
+      <BField isGrouped>
+        <Control>
+          <Button isLink className="previous" onClick={previousStep}>
+            Previous
+          </Button>
+        </Control>
+        <Control>
+          <Button isColor="primary" className="next" type="submit">
+            Next
+          </Button>
+        </Control>
+      </BField>
     </form>
   );
 };
