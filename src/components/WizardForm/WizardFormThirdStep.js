@@ -1,46 +1,60 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import validate from "../../utils/validate";
+import renderSelectField from "../../utils/renderSelectField";
+import { Field as BField, Label, Control, Button } from "bloomer";
 
-const colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"];
-
-const renderColorSelector = ({ input, meta: { touched, error } }) => (
-  <div>
-    <select {...input}>
-      <option value="">Select a color...</option>
-      {colors.map(val => (
-        <option value={val} key={val}>
-          {val}
-        </option>
-      ))}
-    </select>
-    {touched && error && <span>{error}</span>}
-  </div>
-);
+const colors = [
+  "Select",
+  "Red",
+  "Orange",
+  "Yellow",
+  "Green",
+  "Blue",
+  "Indigo",
+  "Violet"
+];
 
 const WizardFormThirdStep = props => {
   const { handleSubmit, pristine, previousStep, submitting } = props;
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>Favorite Color</label>
-        <Field name="favoriteColor" component={renderColorSelector} />
-      </div>
-      <div>
-        <label>Notes</label>
-        <div>
-          <Field name="notes" component="textarea" placeholder="Notes" />
-        </div>
-      </div>
-      <div>
-        <button type="button" className="previous" onClick={previousStep}>
-          Previous
-        </button>
-        <button type="submit" disabled={pristine || submitting}>
-          Submit
-        </button>
-      </div>
+      <BField>
+        <Label>Favorite Color:</Label>
+        <Field
+          name="favoriteColor"
+          component={renderSelectField}
+          options={colors}
+        />
+      </BField>
+      <BField>
+        <Label>Notes</Label>
+        <Control>
+          <Field
+            name="notes"
+            component="textarea"
+            placeholder="Notes"
+            className="textarea"
+          />
+        </Control>
+      </BField>
+      <BField isGrouped>
+        <Control>
+          <Button isLink className="previous" onClick={previousStep}>
+            Previous
+          </Button>
+        </Control>
+        <Control>
+          <Button
+            isColor="primary"
+            type="submit"
+            disabled={pristine || submitting}
+          >
+            Submit
+          </Button>
+        </Control>
+      </BField>
     </form>
   );
 };

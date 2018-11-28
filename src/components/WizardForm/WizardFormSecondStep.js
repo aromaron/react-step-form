@@ -2,7 +2,7 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import validate from "../../utils/validate";
 import renderField from "../../utils/renderField";
-import renderOptionField from "../../utils/renderOptionField";
+import renderRadioField from "../../utils/renderRadioField";
 import renderError from "../../utils/renderError";
 
 import { Field as BField, Control, Button, Label } from "bloomer";
@@ -18,7 +18,7 @@ const WizardFormSecondStep = props => {
           <Field
             name="gender"
             fieldName="gender"
-            component={renderOptionField}
+            component={renderRadioField}
             type="radio"
             label="Male"
             value="male"
@@ -26,7 +26,7 @@ const WizardFormSecondStep = props => {
           <Field
             name="gender"
             fieldName="gender"
-            component={renderOptionField}
+            component={renderRadioField}
             type="radio"
             label="Female"
             value="female"
@@ -34,7 +34,7 @@ const WizardFormSecondStep = props => {
           <Field
             name="gender"
             fieldName="gender"
-            component={renderOptionField}
+            component={renderRadioField}
             type="radio"
             label="Neutral"
             value="neutral"
@@ -42,7 +42,7 @@ const WizardFormSecondStep = props => {
           <Field
             name="gender"
             fieldName="gender"
-            component={renderOptionField}
+            component={renderRadioField}
             type="radio"
             label="I rather not say"
             value="other"
